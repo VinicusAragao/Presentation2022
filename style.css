@@ -17,11 +17,24 @@ header{
   align-items: center;
   padding: 8px;
 }
-img{
-  transition: 200ms;
+#logoLink{
+  color: #fefe00;
+  display: flex;
+  align-items: center;
+  font-size: 12vh;
+  text-decoration: none;
   opacity: 0.8;
+  font-family: FiraSans;
+  transition: 100ms;
 }
-img:hover{
+img{
+  width: 15vh;
+  aspect-ratio: 1/1;
+  transition: 200ms;
+  float: right;
+  margin-left: 15px;
+}
+#logoLink:hover{
   opacity: 1.0;
 }
 nav{
@@ -32,29 +45,60 @@ nav{
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #5595ff;
+  background: #00b1d4;
   color: darkblue;
   width: 25%;
   height: 100%;
-  font-size: 3.5vh;
+  font-size: 4vh;
   margin: 0px;
   padding: 2px 0px;
   text-decoration: none;
-  transition: 80ms;
+  text-align: center;
 }
 .links:hover{
-  background: #3063b4;
-  color: white;
-  border: 1px #002c75 solid;
+  animation: gradient 150ms ease-in forwards;
 }
 section{
   background-color: #0090d3;
-  width: 80%;
-  height: 100%;
+  width: 60%;
   margin: 10px auto;
   border-radius: 10px;
+  padding: 20px;
+  color: #0e0c67;
 }
-h1{
-  color: white;
-  text-indent: 50px;
+h2{
+  text-indent: 4%;
+  margin: 10px 0px;
+  text-decoration: underline;
+}
+p{
+  text-indent: 4%;
+  margin: 0px;
+}
+@font-face {
+  font-family: FiraSans;
+  src: url(fonts/FiraSans-Regular.ttf);
+}
+@keyframes gradient{
+    0%{background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(0,199,238,1) 100%)}
+   20%{background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(2,23,60,1) 20%, rgba(0,199,238,1) 100%)}
+   40%{background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(2,23,60,1) 40%, rgba(0,199,238,1) 100%)}
+   60%{background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(2,23,60,1) 60%, rgba(0,199,238,1) 100%);color: #00c7ee;}
+   80%{background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(2,23,60,1) 80%, rgba(0,199,238,1) 100%);color: #00c7ee;}
+  100%{background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(2,0,36,1) 100%, rgba(0,199,238,1) 100%);color: #00c7ee;}
+}
+@media screen and (max-width: 600px){
+  section{
+    width: 100vw;
+    border-radius: 0px;
+    margin: 8px 0px;
+    padding: 0px;
+  }
+  h2{
+    text-align: center;
+  }
+  p{
+    margin: 5px 10px;
+    text-align: center;
+  }
 }
