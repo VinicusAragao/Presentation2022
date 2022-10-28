@@ -3,8 +3,7 @@ html,body{
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
+  overflow-x: hidden;
 }
 header{
   display: flex;
@@ -75,9 +74,24 @@ p{
   text-indent: 4%;
   margin: 0px;
 }
-@font-face {
-  font-family: FiraSans;
-  src: url(fonts/FiraSans-Regular.ttf);
+.particle{
+  width: 15px;
+  aspect-ratio: 1/1;
+  position: absolute;
+  z-index: 3;
+  animation: particleAnim 300ms 1 forwards;
+  background-color: red;
+  top: 0px;
+  opacity: 1.0;
+  border-radius: 50%;
+}
+@keyframes particleAnim{
+    0%{opacity: 1.0; transform: translateY(0px); background: #f6aa1c;}
+   20%{opacity: 0.8; transform: translateY(10px); background: #bc3908;}
+   40%{opacity: 0.6; transform: translateY(20px); background: #941b0c;}
+   60%{opacity: 0.4; transform: translateY(36px); background: #621708;}
+   80%{opacity: 0.2; transform: translateY(48px); background: #220901;}
+  100%{opacity: 0.0; transform: translateY(60px)}
 }
 @keyframes gradient{
     0%{background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(0,199,238,1) 100%)}
@@ -101,4 +115,8 @@ p{
     margin: 5px 10px;
     text-align: center;
   }
+}
+@font-face {
+  font-family: FiraSans;
+  src: url(fonts/FiraSans-Regular.ttf);
 }
