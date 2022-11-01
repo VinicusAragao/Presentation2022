@@ -1,3 +1,4 @@
 # Presentation2022
-This basic HTML/CSS and JavaScript website started development in 21 oct. 2022, to show progress in my learning of those languages.<br>
-It's the website of a fictional company, which still need a name and logo.
+This basic HTML/CSS website, with a bit of JavaScript.<br>
+It's development started in 21 oct. 2022, with the objective of showing progress in my learning of those languages.<br>
+It's an animation themed website of a fictional company, Trianima-chons, a company that makes animations in multiple types of media.<br>
