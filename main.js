@@ -1,7 +1,29 @@
-window.addEventListener('pointermove', move)
 let x
 let y
 let onLinks = false
+let animName
+let animDuration
+
+const body = document.getElementsByTagName('body')[0]
+const links = document.getElementsByClassName('links')
+const circles = document.getElementsByClassName('circles')
+
+function changeAnimation(itself,name,duration){
+	state = itself.dataset.state
+	if(state === 'active'){
+		window.removeEventListener('pointermove', move)
+		itself.dataset.state = 'inactive'
+	}
+	else if(state === 'inactive'){
+		window.addEventListener('pointermove', move)
+		animName = name
+		animDuration = duration
+		for(item of circles){
+			item.dataset.state = 'inactive'
+		}
+		itself.dataset.state = 'active'
+	}
+}
 
 function move(e){
 	if(!onLinks){
@@ -11,28 +33,35 @@ function move(e){
 	}
 }
 function createPart(){
-	const body = document.getElementsByTagName('body')[0]
 	let el = document.createElement('div')
-	el.setAttribute('class', 'particle')
+	el.setAttribute('class', `${animName} particles`)
 	el.style.marginLeft = (x - 3) + 'px'
-	el.style.marginTop = y + 'px'
+	el.style.marginTop = y +'px'
 	body.appendChild(el)
-	setTimeout(deletePart, 300)
+	setTimeout(deletePart, animDuration)
 }
 function deletePart(){
-	parts = document.getElementsByClassName('particle')
+	parts = document.getElementsByClassName('particles')
 	if(parts.length > 0){
 		parts[0].remove()
 	}
 }
-window.addEventListener('load', () =>{
-	const links = document.getElementsByClassName('links')
-	for(let i = 0; i < links.length; i++){
-		links[i].addEventListener('mouseover', linkIn =>{
+
+window.addEventListener('load', () => {
+	blockAnimation(links)
+	blockAnimation(circles)
+
+	const selected = document.getElementsByClassName('selected')[0]
+	selected.style.animation = 'none'
+})
+
+function blockAnimation(elements){
+	for(element of elements){
+		element.addEventListener('mouseover', linkIn =>{
 			onLinks = true
 		})
-		links[i].addEventListener('mouseout', linkOut =>{
+		element.addEventListener('mouseout', linkOut =>{
 			onLinks = false
-		})	
+		})
 	}
-})
+}

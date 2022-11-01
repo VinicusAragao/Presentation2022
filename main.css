@@ -3,7 +3,6 @@ html,body{
   background-color: #1750AC;
   margin: 0px;
   padding: 0px;
-  overflow-x: hidden;
 }
 header{
   display: flex;
@@ -17,16 +16,17 @@ header{
   padding: 8px;
 }
 #logoLink{
-  color: #fefe00;
+  color: white;
+  text-shadow: 1px 4px blue;
   display: flex;
   align-items: center;
-  font-size: 12vh;
+  font-size: 7vh;
   text-decoration: none;
   opacity: 0.8;
   font-family: FiraSans;
   transition: 100ms;
 }
-img{
+#logo{
   width: 15vh;
   aspect-ratio: 1/1;
   transition: 200ms;
@@ -80,24 +80,86 @@ p{
   text-indent: 4%;
   margin: 0px;
 }
-.particle{
+
+/*Particles*/
+
+.particles{ 
+  position: absolute;
+  top: 0px;
+  z-index: 0;
+}
+.fire{     /* Fire Particles */
   width: 15px;
   aspect-ratio: 1/1;
-  position: absolute;
-  z-index: 3;
-  animation: particleAnim 300ms 1 forwards;
-  background-color: red;
-  top: 0px;
-  opacity: 1.0;
+  animation: fireAnim 300ms 1 forwards;
   border-radius: 50%;
+} 
+.crystals{ /* Crystal Particles */
+  width: 15px;
+  aspect-ratio: 1/1;
+  background: #48cae4;
+  border: solid 2px #03045e;
+  animation: crystalAnim 1000ms 1 forwards;
 }
-@keyframes particleAnim{
+
+/*Animation Buttons*/
+
+#emblems{
+  height: 50vh;
+  width: 15%;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  z-index: 3;
+}
+#emblems:hover .circles{
+  opacity: 1.0;
+}
+.circles{
+  border: 1px solid black;
+  opacity: 0.3;
+  width: 10vh;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  margin-left: 20px;
+  transition: opacity 500ms, width 200ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.circles:hover{
+  width: 12vh;
+}
+.fireBtn{
+  background-color: darkred;
+}
+.crystalBtn{
+  background-color: lightblue;
+}
+.emblemImg{
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+@keyframes fireAnim{
     0%{opacity: 1.0; transform: translateY(0px); background: #f6aa1c;}
-   20%{opacity: 0.8; transform: translateY(10px); background: #bc3908;}
-   40%{opacity: 0.6; transform: translateY(20px); background: #941b0c;}
+   20%{opacity: 0.8; transform: translateY(12px); background: #bc3908;}
+   40%{opacity: 0.6; transform: translateY(24px); background: #941b0c;}
    60%{opacity: 0.4; transform: translateY(36px); background: #621708;}
    80%{opacity: 0.2; transform: translateY(48px); background: #220901;}
   100%{opacity: 0.0; transform: translateY(60px)}
+}
+@keyframes crystalAnim{
+    0%{opacity: 1.0; transform: translateY(0px) rotate(45deg);}
+   20%{opacity: 0.3; transform: translateY(5px) rotate(45deg);}
+   40%{opacity: 1.0; transform: translateY(0px) rotate(45deg);}
+   60%{opacity: 0.3; transform: translateY(-5px) rotate(45deg);}
+   80%{opacity: 0.5; transform: translateY(0px) rotate(45deg);}
+  100%{opacity: 0.0; transform: translateY(5px) rotate(45deg);}
 }
 @keyframes gradient{
     0%{background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(0,199,238,1) 100%)}
@@ -108,10 +170,9 @@ p{
   100%{background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(2,0,36,1) 100%, rgba(0,199,238,1) 100%);color: #00c7ee;}
 }
 @media screen and (max-width: 600px){
-  section{
-    width: 100vw;
-    border-radius: 0px;
-    margin: 8px 0px;
+  main{
+    width: 75vw;
+    margin: 8px auto;
     padding: 0px;
   }
   h2{
