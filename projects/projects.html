@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Tri-Animations - Projetos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../main.css">
+  <link rel="stylesheet" href="projects.css">
+</head>
+<body>
+  <header>
+    <div id="titleCnt">
+      <a href="../index.html" id="logoLink" title="Tri-Animations">
+        Tri-Animations
+        <img id="logo" src="../images/logo.png" alt="Tri-Animations Logo">
+      </a>
+    </div>
+    <nav>
+      <a href="#0" class="links selected">Projetos Realizados</a>
+      <a href="" class="links">Encomendar</a>
+      <a href="../index.html" class="links">Página Inicial</a>
+      <a href="" class="links">Contatar</a>
+      <a href="../about/about.html" class="links">Sobre</a>
+    </nav>
+  </header>
+
+  <main>
+  <div class="divisions">
+    <h3>Algum Efeito</h3>
+  </div>
+  <div class="divisions mouseDivision">
+    <h3>Efeitos que Seguem o Mouse</h3>
+    <div id="whiteBoard"></div>
+    <div id="emblems">
+      <div data-state="inactive" class="circles fireBtn" title="Bola de Fogo" onclick="changeAnimation(this,'fire',300,true)">
+        <img class="emblemImg" src="../images/fireEmblem.svg">
+      </div>
+
+      <div data-state="inactive" class="circles crystalBtn" title="Trilha de Cristais" onclick="changeAnimation(this,'crystals',1000,true)">
+        <img class="emblemImg" src="../images/crystal.png">
+      </div>
+      <div id="laserInputsCtn">
+        <div data-state="inactive" class="circles laserBtn" title="Laser" onclick="changeAnimation(this,'laser',0,false)">
+          <img class="emblemImg" src="../images/laser.png">
+        </div>
+        <div id="laserInputs">
+          <input type="number" onchange="changeLaserProperties('width',this)">
+          <input type="color" onchange="changeLaserProperties('background-color',this)">
+        </div>
+      </div>
+    </div>
+  </div>
+  </main>
+  <script type="text/javascript" src="../main.js"></script>
+</body>
+</html>

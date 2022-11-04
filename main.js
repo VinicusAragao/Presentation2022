@@ -1,36 +1,65 @@
 let x
 let y
-let onLinks = false
 let animName
 let animDuration
+let eraseble
+let setTimeoutsId = []
 
 const body = document.getElementsByTagName('body')[0]
 const links = document.getElementsByClassName('links')
 const circles = document.getElementsByClassName('circles')
+const logo = document.getElementById('logoLink')
+const parts = document.getElementsByClassName('particles')
+const input = document.getElementsByTagName('input')
 
-function changeAnimation(itself,name,duration){
+const rules = document.styleSheets[1].cssRules
+
+function changeAnimation(itself,name,duration,erase){
+	deleteAll()
 	state = itself.dataset.state
-	if(state === 'active'){
-		window.removeEventListener('pointermove', move)
-		itself.dataset.state = 'inactive'
+	window.removeEventListener('pointerdown', pressedDown)
+	window.removeEventListener('pointerdown', move)
+	window.removeEventListener('pointerup', pressedUp)
+	window.removeEventListener('pointermove', move)
+	for(let i = 0; i < setTimeoutsId.length; i++){
+		clearTimeout(setTimeoutsId[i])
 	}
-	else if(state === 'inactive'){
-		window.addEventListener('pointermove', move)
+
+	if(state === 'inactive'){
+		if(name === 'laser'){
+			window.addEventListener('pointerdown', move)
+			window.addEventListener('pointerdown', pressedDown)
+			window.addEventListener('pointerup', pressedUp)
+		}
+		else{
+			window.addEventListener('pointermove', move)
+		}
 		animName = name
 		animDuration = duration
+		eraseble = erase
+
 		for(item of circles){
 			item.dataset.state = 'inactive'
 		}
 		itself.dataset.state = 'active'
 	}
+	else if(state === 'active'){
+		itself.dataset.state = 'inactive'
+	}
 }
 
 function move(e){
-	if(!onLinks){
-		x = e.clientX
-		y = e.pageY
-		createPart()
-	}
+	x = e.clientX
+	y = e.pageY
+	createPart()
+}
+function pressedDown(){
+	body.classList.add('noSelect')
+	window.addEventListener('pointermove', move)
+}
+function pressedUp(){
+	body.classList.remove('noSelect')
+	window.removeEventListener('pointermove', move)
 }
 function createPart(){
 	let el = document.createElement('div')
@@ -38,30 +67,36 @@ function createPart(){
 	el.style.marginLeft = (x - 3) + 'px'
 	el.style.marginTop = y +'px'
 	body.appendChild(el)
-	setTimeout(deletePart, animDuration)
+	if(eraseble){
+		setTimeoutsId.push(setTimeout(deletePart, animDuration))
+	}
 }
 function deletePart(){
-	parts = document.getElementsByClassName('particles')
 	if(parts.length > 0){
 		parts[0].remove()
 	}
 }
-
-window.addEventListener('load', () => {
-	blockAnimation(links)
-	blockAnimation(circles)
-
-	const selected = document.getElementsByClassName('selected')[0]
-	selected.style.animation = 'none'
-})
-
-function blockAnimation(elements){
-	for(element of elements){
-		element.addEventListener('mouseover', linkIn =>{
-			onLinks = true
-		})
-		element.addEventListener('mouseout', linkOut =>{
-			onLinks = false
-		})
+function deleteAll(){
+	for(let i = 0; i < parts.length;){
+		parts[0].remove()
 	}
 }
+function changeLaserProperties(type,input){
+	newValue = input.value
+
+	if(type === 'width'){
+		newValue += 'px'
+	}
+
+	for(let i = 0; i < rules.length; i++) {
+  		if(rules[i].selectorText === '.laser') {
+    		laserRules = rules[i];
+  		}
+	}
+	laserRules.style.setProperty(type, newValue)
+	console.log(laserRules)
+}
+window.addEventListener('load', () => {
+	changeLaserProperties('width', input[0])
+	changeLaserProperties('background-color', input[1])
+})
