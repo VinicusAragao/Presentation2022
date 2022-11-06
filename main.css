@@ -1,4 +1,4 @@
-*{box-sizing: border-box;}
+*/*,*:before,*:after*/{box-sizing: border-box;}
 html,body{
   background-color: #1750AC;
   margin: 0px;
@@ -52,7 +52,7 @@ nav{
   color: darkblue;
   width: 25%;
   height: 100%;
-  font-size: 4vh;
+  font-size: max(14px,4vh);
   margin: 0px;
   padding: 2px 0px;
   text-decoration: none;
