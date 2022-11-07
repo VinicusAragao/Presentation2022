@@ -26,7 +26,7 @@
   <main>
   	<h2>Descreva seu pedido abaixo:</h2>
   	<form action="">
-  		<h3>Qual é o seu pedido?</h3>
+  		<h3>Qual é o tipo do seu pedido?</h3>
   		<div class="formRow">
   			<div class="option">
 	  			<input type="radio" id="animation" name="orderType">
@@ -40,9 +40,24 @@
 	  			<input type="radio" id="Other..." name="orderType">
 	  			<label for="Other...">Outro...</label></div>
   		</div>
-  		<h3>Descreva seu pedido:</h3>
-  		<input title="Enviar Pedido" type="submit" name="submit" value="Enviar">
+  		<h3>Seu pedido é similar a algum trabalho realizado por nós?</h3>
+      <div class="formRow">
+        <div class="option">
+          <input type="radio" id="yes" name="same">
+          <label for="yes">Sim</label></div>
+
+        <div class="option">
+          <input type="radio" id="no" name="same">
+          <label for="no">Não</label></div>
+      </div>
+      <h3>Descreva as especifições de seu pedido, como<br>tamanhos, cores, formas, etc, abaixo:</h3>
+      <textarea title="Descrição do pedido" id="description" name="description"></textarea>
+      <div class="btnCtn">
+  		  <input title="Enviar Pedido" type="submit" id="submit" name="submit" value="Enviar">
+        <input title="Resetar Formulário" type="reset" id="reset" name="reset" value="Resetar">
+      </div>
   	</form>
   </main>
+  <script type="text/javascript" src="order.js"></script>
 </body>
 </html>

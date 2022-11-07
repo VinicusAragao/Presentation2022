@@ -1,7 +1,6 @@
 main{
 	width: 90%;
 	padding: 10px;
-	height: 100vh;
 	display: flex;
 	flex-flow: column;
 	align-items: center;
@@ -37,24 +36,57 @@ label{
 	font-size: max(16px, 3.5vh);
 }
 .formRow{
-	padding: 20px 15%;
+	padding: 15px 15%;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	border-bottom: solid white 2px;
 }
-input[type = 'submit']{
-	background-color: red;
-	border: 0px;
-	margin: auto;
+textarea{
+	width: 50%;
+	height: min(150px,30vh);
 	display: block;
-	color: white;
+	margin: 25px auto;
+	padding: 10px;
+	border-radius: 8px;
+	font-size: min(16px, 4vh);
+}
+.btnCtn{
+	display: flex;
+	justify-content: center;
+}
+input[type = 'submit'],
+input[type = 'reset']{
+	border: 0px;
 	border-radius: 15px;
-	transition: 100ms;
-	width: 15%;
-	aspect-ratio: 4/1;
+	transition: 150ms;
+	padding: 15px 50px;
+	margin-left: 20px;
+	font-size: 20px;
+	cursor: pointer;
+}
+input[type = 'submit']{
+	color: blue;
+	background-color: white;
+	border: solid white 2px;
 }
 input[type = 'submit']:hover{
-	background-color: darkred;
+	color: white;
+	background-color: #0000e4;
+	border: solid lightblue 2px;
+}
+input[type = 'reset']{
+	color: darkred;
+	background-color: white;
+	border: solid white 2px;
+}
+input[type = 'reset']:hover{
+	color: #000;
+	background-color: #ff3838;
+	border: solid #000 2px;
+}
+input[type = 'submit']:active,
+input[type = 'reset']:active{
+	transform: scale(1.07);
 }
 
 @media screen and (max-width: 600px){
@@ -71,5 +103,8 @@ input[type = 'submit']:hover{
 	.option{
 		margin: 0px 0px 0px auto;
 		width: 75%;
+	}
+	textarea{
+		width: 100%;
 	}
 }

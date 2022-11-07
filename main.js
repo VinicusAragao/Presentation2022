@@ -8,6 +8,8 @@ let setTimeoutsId = []
 let laserWidth
 let laserColor
 let laserBlocked = false
+let laserPressed = false
+let aimOn = false
 
 const body = document.getElementsByTagName('body')[0]
 const links = document.getElementsByClassName('links')
@@ -15,31 +17,31 @@ const circles = document.getElementsByClassName('circles')
 const logo = document.getElementById('logoLink')
 const parts = document.getElementsByClassName('particles')
 const input = document.getElementsByTagName('input')
+let aim
 
 function changeAnimation(itself,name,duration,erase){
 	deleteAll()
 	state = itself.dataset.state
 
 	window.removeEventListener('pointerdown', pressedDown)
-	window.removeEventListener('pointerdown', move)
+	window.removeEventListener('pointerdown', getPosition)
 	window.removeEventListener('pointerup', pressedUp)
-	window.removeEventListener('pointermove', move)
+	window.removeEventListener('pointermove', getPosition)
 	window.removeEventListener('pointermove', moveAim)
+	laserPressed = false
+	aimOn = false
+	aim?.remove()
 
 	for(let i = 0; i < setTimeoutsId.length; i++){
 		clearTimeout(setTimeoutsId[i])
 	}
-
 	if(state === 'inactive'){
 		if(name === 'laser'){
-			window.addEventListener('pointermove', moveAim)
-			window.addEventListener('pointerdown', move)
 			window.addEventListener('pointerdown', pressedDown)
+			window.addEventListener('pointerdown', getPosition)
 			window.addEventListener('pointerup', pressedUp)
 		}
-		else{
-
-		}
+		window.addEventListener('pointermove', getPosition)
 		animName = name
 		animDuration = duration
 		eraseble = erase
@@ -54,23 +56,33 @@ function changeAnimation(itself,name,duration,erase){
 	}
 }
 
-function move(e){
-	if(!laserBlocked){
-		x = e.clientX
-		y = e.pageY
+function getPosition(e){
+	x = e.clientX
+	y = e.pageY
+	if(animName === 'laser'){
+		if(!aimOn){createAim()}
+		else{moveAim()}
+
+		if(laserPressed){
+			createPart()
+		}	
+	}
+	else if(!laserBlocked){
 		createPart()
 	}
 }
+
 function pressedDown(){
 	if(!laserBlocked){
+		laserPressed = true
 		body.classList.add('noSelect')
-		window.addEventListener('pointermove', move)
 	}
 }
 function pressedUp(){
+	laserPressed = false
 	body.classList.remove('noSelect')
-	window.removeEventListener('pointermove', move)
 }
+
 function createPart(){
 	let el = document.createElement('div')
 	el.setAttribute('class', `${animName} particles`)
@@ -102,18 +114,19 @@ function deleteAll(){
 	}
 }
 function createAim(){
-	let aim = document.createElement('div')
-	aim.setAttribute('class', `laserAim particles`)
-	aim.style.width = laserWidth + 'px'
-	aim.style.backgroundColor = laserColor
-	aim.style.marginLeft = (x - (laserWidth/2)) + 'px'
-	aim.style.marginTop = (y - (laserWidth/2)) +'px'
-	body.appendChild(aim)
-	console.log(body)
+	const el = document.createElement('div')
+	el.setAttribute('class', `laserAim`)
+	el.style.width = laserWidth + 'px'
+	el.style.backgroundColor = laserColor
+	el.style.marginLeft = (x - (laserWidth/2)) + 'px'
+	el.style.marginTop = (y - (laserWidth/2)) +'px'
+	body.appendChild(el)
+
+	aimOn = true
+	aim = document.getElementsByClassName("laserAim")[0]
+	window.addEventListener('pointermove', moveAim)
 }
 function moveAim(){
-	let aim = document.getElementsByClassName("laserAim")[0]
-	console.log(aim)
 	aim.style.marginLeft = (x - (laserWidth/2)) + 'px'
 	aim.style.marginTop = (y - (laserWidth/2)) +'px'
 }
@@ -151,5 +164,9 @@ function changeLaserProperties(type,input){
 	}
 	else if(type === 'background-color'){
 		laserColor = newValue
+	}
+	if(aimOn){
+		aim.remove()
+		createAim()
 	}
 }

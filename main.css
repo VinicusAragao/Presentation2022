@@ -26,7 +26,7 @@ header{
   font-family: FiraSans;
   transition: 100ms;
   position: relative;
-  z-index: 3;
+  z-index: 4;
 }
 #logo{
   width: 15vh;
@@ -42,7 +42,7 @@ nav{
   height: 50px;
   display: flex;
   position: relative;
-  z-index: 3;
+  z-index: 4;
 }
 .links,.selected{
   display: flex;
